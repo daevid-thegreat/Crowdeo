@@ -6,9 +6,9 @@ const Footer = () => {
       <div>
         <Spacer y={2} />
         <div className="flex items-center justify-between">
-          <p>&copy; 2024 Your Company</p>
+          <p>&copy; 2024 Crowdoe</p>
           <p>
-            Made with <span role="img" aria-label="heart">❤️</span> by Your Team
+            Made with <span role="img" aria-label="heart">❤️</span>
           </p>
         </div>
         <Spacer y={2} />
