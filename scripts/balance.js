@@ -1,7 +1,7 @@
-// TokenBalance.js
+// balance.js
 import { useEffect, useState } from 'react';
 
-const TokenBalance = ({ web3, tokenContractAddress, account }) => {
+const Balance = ({ web3, tokenContractAddress, account }) => {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
@@ -24,4 +24,4 @@ const TokenBalance = ({ web3, tokenContractAddress, account }) => {
   );
 };
 
-export default TokenBalance;
+export default Balance;

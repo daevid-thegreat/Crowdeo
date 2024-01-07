@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\mckin\\Desktop\\Works\\Software Development\\crowdoe\\contracts\\Crowdoe.sol": {
-      "lastModificationDate": 1704643334788,
-      "contentHash": "077d13b6a9c49084873dc1cd8c83709a",
+      "lastModificationDate": 1704658315185,
+      "contentHash": "f148cdf55b465f57dc0134bb6dcd52df",
       "sourceName": "contracts/Crowdoe.sol",
       "solcConfig": {
         "version": "0.8.20",

@@ -1,7 +1,7 @@
-// SubmitReview.js
+// review.js
 import { useState } from 'react';
 
-const SubmitReview = ({ web3, reviewContractAddress, account }) => {
+const Review = ({ web3, reviewContractAddress, account }) => {
   const [review, setReview] = useState('');
 
   const handleReviewSubmit = async () => {
@@ -22,4 +22,4 @@ const SubmitReview = ({ web3, reviewContractAddress, account }) => {
   );
 };
 
-export default SubmitReview;
+export default Review;
