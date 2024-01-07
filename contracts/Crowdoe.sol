@@ -36,9 +36,4 @@ contract ReviewToken is Ownable(0x03f7EDd3c39D5a0e8c9189f7fBF2Eaf4Ce49ef10) {
 
         emit ReviewSubmitted(msg.sender, _review, tokensToEarn);
     }
-
-    // Function to withdraw any accidentally sent ERC20 tokens
-    function withdrawTokens(address _token, address _to, uint256 _amount) external onlyOwner {
-        token.transfer(_to, _amount);
-    }
 }
