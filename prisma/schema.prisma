@@ -8,15 +8,17 @@ datasource db {
 }
 
 model Company {
-  id          Int    @id @default(autoincrement())
+  id          String   @id @default(uuid())
   name        String
   description String
   passcode    String
+  Review      Review[]
 }
 
 model Review {
-  id        Int    @id @default(autoincrement())
-  companyId Int
+  id        String  @id @default(uuid())
+  companyId String
+  company   Company @relation(fields: [companyId], references: [id])
   rating    Int
   comment   String
 }

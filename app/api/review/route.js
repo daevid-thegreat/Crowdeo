@@ -3,20 +3,24 @@ import {NextRequest, NextResponse} from "next/server";
 
 export async function POST(req: NextRequest) {
 
-  const { name, description } = req.body;
+  const { companyId, rating, comment } = req.body;
 
   const prisma = new PrismaClient();
 
   try {
-    const newCompany = await prisma.company.create({
+    const newReview = await prisma.review.create({
       data: {
-        name,
-        description,
-        passcode: Math.floor(100000 + Math.random() * 900000).toString(),
+        rating,
+        comment,
+        company: {
+          connect: {
+            id: companyId,
+          },
+        },
       },
     });
 
-    return NextResponse.json(newCompany);
+    return NextResponse.json(newReview);
   } catch (error) {
     console.error(error);
     return NextResponse.error(error);
@@ -29,9 +33,9 @@ export async function GET() {
   const prisma = new PrismaClient();
 
   try {
-    const companies = await prisma.company.findMany({
+    const companies = await prisma.review.findMany({
       include: {
-        Review: true,
+        company: true,
       },
     });
 
