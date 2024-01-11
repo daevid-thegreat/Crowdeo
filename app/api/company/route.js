@@ -1,18 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse} from "next/server";
 
-export async function POST(NextRequest) {
-    const req = await NextRequest.request;
-    console.log(req);
+export async function POST(req, res) {
+  const body = await req.json();
 
   const prisma = new PrismaClient();
 
   try {
     const newCompany = await prisma.company.create({
       data: {
-        name: req.body.name,
-        image: req.body.image,
-        description: req.body.description,
+        name: body.name,
+        image: body.image,
+        description: body.description,
         passcode: Math.floor(100000 + Math.random() * 900000).toString(),
       },
     });
