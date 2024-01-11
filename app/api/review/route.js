@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import {NextRequest, NextResponse} from "next/server";
+import Web3 from 'web3';
 
 export async function POST(req: NextRequest) {
 
@@ -18,6 +19,48 @@ export async function POST(req: NextRequest) {
           },
         },
       },
+    });
+
+    // Step 2: Interact with the smart contract
+    const contractABI = [
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'rating',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'comment',
+            type: 'string',
+          },
+        ],
+        name: 'ReviewToken',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ];
+    const contractAddress = '0xYourContractAddress'; // Replace with your actual contract address
+    const ethereumNodeURL = '127.0.0.1:8545';
+
+    const web3 = new Web3(new Web3.providers.HttpProvider(ethereumNodeURL));
+
+    // Replace with the private key of the user submitting the review
+    const privateKey = '0xYourPrivateKey';
+
+    // Use the private key to sign the transaction
+    const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+    web3.eth.accounts.wallet.add(account);
+
+    // Get the contract instance
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+    // Call the submitReview function
+    await contract.methods.submitReview(rating, comment).send({
+      from: account.address,
+      gas: 200000, // Adjust the gas limit based on your contract's requirements
     });
 
     return NextResponse.json(newReview);
