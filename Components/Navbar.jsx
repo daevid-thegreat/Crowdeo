@@ -65,7 +65,7 @@ export default function Nav() {
         {/*</NavbarItem>*/}
 
           <NavbarItem>
-          <Link href="#" >
+          <Link href="/companies" >
             Companies
           </Link>
         </NavbarItem>
