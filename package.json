@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@helia/json": "^2.0.1",
     "@nextui-org/react": "^2.2.9",
     "@openzeppelin/contracts": "^5.0.1",
     "@prisma/client": "^5.8.0",
