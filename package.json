@@ -14,6 +14,7 @@
     "@openzeppelin/contracts": "^5.0.1",
     "@prisma/client": "^5.8.0",
     "framer-motion": "^10.17.6",
+    "helia": "^3.0.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
