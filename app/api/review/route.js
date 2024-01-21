@@ -1,6 +1,11 @@
 import { PrismaClient } from '@prisma/client';
 import {NextRequest, NextResponse} from "next/server";
 import Web3 from 'web3';
+import { json } from '@helia/json';
+import { createHelia } from 'helia';
+
+const helia = createHelia();
+const j = json(helia);
 
 export async function POST(req, res) {
 
@@ -20,6 +25,8 @@ export async function POST(req, res) {
         },
       },
     });
+
+    const cid = await j.put(body);
 
     // Step 2: Interact with the smart contract
     const contractABI = [
@@ -63,7 +70,7 @@ export async function POST(req, res) {
       gas: 200000, // Adjust the gas limit based on your contract's requirements
     });
 
-    return NextResponse.json(newReview);
+    return NextResponse.json({...newReview, cid});
   } catch (error) {
     console.error(error);
     return NextResponse.error(error);
