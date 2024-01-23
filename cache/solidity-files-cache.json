@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\mckin\\Desktop\\Works\\Software Development\\crowdoe\\contracts\\Crowdoe.sol": {
-      "lastModificationDate": 1704658315185,
-      "contentHash": "f148cdf55b465f57dc0134bb6dcd52df",
+      "lastModificationDate": 1706025037379,
+      "contentHash": "2b9cfdeb9512679e6424ea3ecbb00f57",
       "sourceName": "contracts/Crowdoe.sol",
       "solcConfig": {
         "version": "0.8.20",
@@ -38,7 +38,7 @@
       ],
       "artifacts": [
         "CrowdoeToken",
-        "ReviewToken"
+        "Review"
       ]
     },
     "C:\\Users\\mckin\\Desktop\\Works\\Software Development\\crowdoe\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol": {
