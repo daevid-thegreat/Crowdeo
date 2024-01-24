@@ -1,14 +1,14 @@
-import { PrismaClient } from '@prisma/client';
-import {NextRequest, NextResponse} from "next/server";
+import {PrismaClient} from '@prisma/client';
+import {NextResponse} from "next/server";
 
-export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
-    const { id } = params;
+export async function GET(req, { params }) {
+  const id = params.id;
   const prisma = new PrismaClient();
 
   try {
     const company = await prisma.company.findUnique({
       where: {
-        id: parseInt(id),
+        id: id,
       },
       include: {
         Review: true,
