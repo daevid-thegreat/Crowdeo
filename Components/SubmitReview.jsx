@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input} from "@nextui-org/react";
 import {Textarea} from "@nextui-org/react";
 import {FaStar} from "react-icons/fa6";
+import {EyeFilledIcon} from "./EyeFilledIcon";
+import {EyeSlashFilledIcon} from "./EyeSlashFilledIcon";
 
 export default function SubmitReview() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <>
@@ -42,6 +47,24 @@ export default function SubmitReview() {
                       placeholder="Enter your description"
                       className="flex"
                     />
+
+                  <Input
+                      isRequired
+          label="PassCode"
+          variant="bordered"
+          placeholder="Enter your passcode"
+          endContent={
+            <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
+              {isVisible ? (
+                <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              ) : (
+                <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              )}
+            </button>
+          }
+          type={isVisible ? "text" : "password"}
+          className="pointer-events-none flex items-center"
+    />
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="flat" onPress={onClose}>

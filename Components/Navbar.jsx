@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button,} from "@nextui-org/react";
 import Image from "next/image";
 import {Web3} from "web3";
@@ -7,6 +7,14 @@ import {Web3} from "web3";
 export default function Nav() {
     const [isConnected, setIsConnected] = React.useState(false);
     const [userAccount, setUserAccount] = React.useState(null);
+
+      useEffect(() => {
+    const savedUserAccount = localStorage.getItem("userAccount");
+    if (savedUserAccount) {
+      setUserAccount(savedUserAccount);
+      setIsConnected(true);
+    }
+  }, []);
     const detectCurrentProvider = async () => {
         try {
         if (window.ethereum) {
@@ -35,6 +43,7 @@ export default function Nav() {
             const userAccount = accounts[0];
             setUserAccount(userAccount);
             setIsConnected(true);
+            localStorage.setItem("userAccount", userAccount);
           } else {
             console.log('No Ethereum accounts found.');
           }
@@ -46,6 +55,7 @@ export default function Nav() {
 
     const onDisconnect = () => {
         setIsConnected(false);
+        localStorage.removeItem("userAccount");
     };
   return (
     <Navbar className={"bg-white px-10 py-4 flex justify-around"}>
