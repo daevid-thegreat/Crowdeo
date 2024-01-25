@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input} from "@nextui-org/react";
 import {Textarea} from "@nextui-org/react";
 import {FaStar} from "react-icons/fa6";
@@ -8,12 +8,20 @@ import {EyeSlashFilledIcon} from "./EyeSlashFilledIcon";
 export default function SubmitReview() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isVisible, setIsVisible] = useState(false);
+  const [userAccount, setUserAccount] = React.useState(null);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
+  useEffect(() => {
+    const savedUserAccount = localStorage.getItem("userAccount");
+    if (savedUserAccount) {
+      setUserAccount(savedUserAccount);
+    }
+  }, []);
+
   return (
     <>
-      <Button onPress={onOpen} color="primary">Review Company</Button>
+      <Button onPress={userAccount ? onOpen : alert("Please connect an ethereum wallet")} color="primary">Review Company</Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
