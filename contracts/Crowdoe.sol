@@ -19,6 +19,11 @@ contract Crowdoe is ERC20, Ownable(0x03f7EDd3c39D5a0e8c9189f7fBF2Eaf4Ce49ef10) {
         require(balanceOf(owner()) >= 20 * 10**decimals(), "Insufficient balance in the contract");
         _transfer(owner(), user, 20 * 10**decimals());
     }
+
+     // Function to get the token balance of a specific address
+    function getTokenBalance(address account) external view returns (uint256) {
+        return balanceOf(account);
+    }
 }
 
 
