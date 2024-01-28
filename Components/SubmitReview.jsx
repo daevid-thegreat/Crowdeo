@@ -1,14 +1,25 @@
+'use client';
+
+import {Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from "@nextui-org/react";
 import React, {useEffect, useState} from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Input} from "@nextui-org/react";
-import {Textarea} from "@nextui-org/react";
-import {FaStar} from "react-icons/fa6";
+
 import {EyeFilledIcon} from "./EyeFilledIcon";
 import {EyeSlashFilledIcon} from "./EyeSlashFilledIcon";
+import {FaStar} from "react-icons/fa6";
+import {Textarea} from "@nextui-org/react";
 
-export default function SubmitReview() {
+export default function SubmitReview({company_id}) {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [isVisible, setIsVisible] = useState(false);
   const [userAccount, setUserAccount] = React.useState(null);
+
+  const handleReviewButtonClick = () => {
+    if (userAccount) {
+      onOpen();
+    } else {
+      alert("Please connect an Ethereum wallet.");
+    }
+  };
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
@@ -19,20 +30,49 @@ export default function SubmitReview() {
     }
   }, []);
 
+  const submit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.target);
+    const formData = {
+      rating: data.get("rating"),
+      comment: data.get("comment"),
+      passcode: data.get("passcode"),
+      companyId: company_id,
+      userAddress: userAccount
+    };
+    
+    fetch("http://localhost:3000/api/review", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.ok) {
+        alert("Review submitted successfully");
+      } else {
+        alert("Review failed to submit");
+      }
+    });
+  };
+
   return (
     <>
-      <Button onPress={userAccount ? onOpen : alert("Please connect an ethereum wallet")} color="primary">Review Company</Button>
+      <Button onPress={handleReviewButtonClick} color="primary">Review Company</Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         placement="top-center"
       >
+        <form onSubmit={submit}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Review</ModalHeader>
               <ModalBody>
+                
                   <Input
+                  name="rating"
                       isRequired
                       type="number"
                       label="Rating"
@@ -50,14 +90,16 @@ export default function SubmitReview() {
                     />
 
                   <Textarea
+                      name="comment"
                       isRequired
-                      label="Description"
-                      placeholder="Enter your description"
+                      label="Comment"
+                      placeholder="Enter your comment"
                       className="flex"
                     />
 
                   <Input
                       isRequired
+                      name="passcode"
           label="PassCode"
           variant="bordered"
           placeholder="Enter your passcode"
@@ -78,13 +120,14 @@ export default function SubmitReview() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" type="submit">
                   Submit Review
                 </Button>
               </ModalFooter>
             </>
           )}
         </ModalContent>
+        </form>
       </Modal>
     </>
   );

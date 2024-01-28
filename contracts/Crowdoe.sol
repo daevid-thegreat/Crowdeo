@@ -4,7 +4,7 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Crowdoe is ERC20, Ownable(0x03f7EDd3c39D5a0e8c9189f7fBF2Eaf4Ce49ef10) {
+contract Crowdoe is ERC20, Ownable(0x79bB469E278C7F00697d585edeb84fC6FB1dA994) {
     constructor() ERC20("CrowdoeToken", "MTK") {
         // Mint 100,000 tokens during deployment
         _mint(msg.sender, 100000 * 10**decimals());

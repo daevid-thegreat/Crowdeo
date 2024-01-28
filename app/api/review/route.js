@@ -1,22 +1,35 @@
-import { PrismaClient } from '@prisma/client';
 import {NextRequest, NextResponse} from "next/server";
-import Web3 from 'web3';
-import { json } from '@helia/json';
-import { createHelia } from 'helia';
 
-const helia = createHelia();
-const j = json(helia);
+import { PrismaClient } from '@prisma/client';
+import rewardUserForReview from '@/scripts/SendReward';
 
 export async function POST(req, res) {
 
-  const body = await req.json()
-
   const prisma = new PrismaClient();
 
+
+  const body = await req.json()
+  
+
   try {
+
+    const passCode = body.passcode;
+    const userAddress = body.userAddress;
+    const company = await prisma.company.findFirst({
+      where: {
+        id: body.companyId,
+      },
+    });
+
+    if (company.passcode != passCode) {
+      console.log(company.passcode + " == " + passCode)
+      console.log('Invalid passcode')
+      return NextResponse.json({ status: 401, body: 'Invalid passcode'})
+    }
+  
     const newReview = await prisma.review.create({
       data: {
-        rating: body.rating,
+        rating: parseInt(body.rating),
         comment: body.comment,
         company: {
           connect: {
@@ -24,12 +37,17 @@ export async function POST(req, res) {
           },
         },
       },
+    }).then(async () => {
+      rewardUserForReview(userAddress)
     });
 
-    return NextResponse.json(newReview);
+    console.log('New review created')
+
+
+    return NextResponse.json({ status: 200, body: newReview })
   } catch (error) {
     console.error(error);
-    return NextResponse.error(error);
+    return NextResponse.json({ status: 500, body: error })
   } finally {
     await prisma.$disconnect();
   }
@@ -45,10 +63,10 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json(companies);
+    return NextResponse.json({ status: 200, body: companies });
   } catch (error) {
     console.error(error);
-    return NextResponse.error(error);
+    return NextResponse.json({ status: 500, body: error })
   } finally {
     await prisma.$disconnect();
   }

@@ -1,11 +1,12 @@
 "use client";
 
+import {Card, CardBody, CardFooter, CardHeader, Divider, Image, Link} from "@nextui-org/react";
 import React, {useEffect, useState} from 'react'
-import {useParams} from "next/navigation";
-import {Card, CardHeader, CardBody, CardFooter, Divider, Link, Image} from "@nextui-org/react";
+
 import Nav from "@/Components/Navbar";
 import Review from "@/Components/Review";
 import SubmitReview from "@/Components/SubmitReview";
+import {useParams} from "next/navigation";
 
 const SingleCompany = () => {
     const {id} = useParams()
@@ -36,7 +37,7 @@ const SingleCompany = () => {
       </CardBody>
       <Divider/>
       <CardFooter>
-        <SubmitReview/>
+        <SubmitReview company_id={id}/>
       </CardFooter>
     </Card>
             <div className="max-w-screen mx-24 my-6">
