@@ -44,7 +44,7 @@ const SingleCompany = () => {
                 <h1 className={'text-2xl my-2 font-semibold'}>
                     Reviews
                 </h1>
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-4 gap-4">
                     {
                         company?.Review.map((review, index) => {
                             return <Review key={index} review={review}/>
