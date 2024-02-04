@@ -17,9 +17,10 @@ model Company {
 }
 
 model Review {
-  id        String  @id @default(uuid())
-  companyId String
-  company   Company @relation(fields: [companyId], references: [id])
-  rating    Int
-  comment   String
+  id              String  @id @default(uuid())
+  reviewerAddress String  @default("0x0")
+  companyId       String
+  company         Company @relation(fields: [companyId], references: [id])
+  rating          Int
+  comment         String
 }
