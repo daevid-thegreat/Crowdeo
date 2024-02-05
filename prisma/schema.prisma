@@ -19,6 +19,8 @@ model Company {
 model Review {
   id              String  @id @default(uuid())
   reviewerAddress String  @default("0x0")
+  upvotes         Int     @default(0)
+  downvotes       Int     @default(0)
   companyId       String
   company         Company @relation(fields: [companyId], references: [id])
   rating          Int

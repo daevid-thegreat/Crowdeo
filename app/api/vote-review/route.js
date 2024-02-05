@@ -12,33 +12,27 @@ export async function POST(req, res) {
   
 
   try {
+    const reviewID = body.reviewId
+    const userAddress = body.userAddress
+    const vote = body.vote
+    let upvote = 0
+    let downvote = 0
 
-    const passCode = body.passcode;
-    const userAddress = body.userAddress;
-    const company = await prisma.company.findFirst({
-      where: {
-        id: body.companyId,
-      },
-    });
-
-    if (company.passcode != passCode) {
-      console.log(company.passcode + " == " + passCode)
-      console.log('Invalid passcode')
-      return NextResponse.json({ status: 401, body: 'Invalid passcode'})
+    if (vote == true) {
+        upvote = 1
+        } else {
+        downvote = 1
     }
   
-    const newReview = await prisma.review.create({
-      data: {
-        rating: parseInt(body.rating),
-        reviewAddress: userAddress,
-        comment: body.comment,
-        company: {
-          connect: {
-            id: body.companyId,
-          },
+    const updateReview = await  prisma.review.update({
+        where: {
+            id: reviewID
         },
-      },
-    }).then(async () => {
+        data: {
+            upvote: updateReview.upvote + upvote,
+            downvote: updateReview.downvote + downvote
+        }
+        }).then(async () => {
       rewardUserForReview(userAddress)
     });
 
