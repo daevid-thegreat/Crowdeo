@@ -1,0 +1,39 @@
+[
+    {
+      "userAddress": "0x1aBcDeFgHiJkLmNoPqRsTuVwXyZ123456",
+      "review": "Excellent service! I highly recommend it.",
+      "rating": 5,
+      "companyId" : ""
+    },
+    {
+      "userAddress": "0x2BcDeFgHiJkLmNoPqRsTuVwXyZ123457",
+      "review": "Average experience. Could be better.",
+      "rating": 3,
+        "companyId" : ""
+    },
+    {
+      "userAddress": "0x3aBcDeFgHiJkLmNoPqRsTuVwXyZ123458",
+      "review": "Not satisfied with the product quality.",
+      "rating": 2,
+        "companyId" : ""
+    },
+    {
+      "userAddress": "0x4aBcDeFgHiJkLmNoPqRsTuVwXyZ123459",
+      "review": "Great value for the price.",
+      "rating": 4,
+        "companyId" : ""
+    },
+    {
+      "userAddress": "0x5aBcDeFgHiJkLmNoPqRsTuVwXyZ123460",
+      "review": "Terrible experience. Will not recommend.",
+      "rating": 1,
+        "companyId" : ""
+    },
+    {
+      "userAddress": "0x6aBcDeFgHiJkLmNoPqRsTuVwXyZ123461",
+      "review": "Outstanding support team!",
+      "rating": 5,
+        "companyId" : ""
+    }
+  ]
+  
