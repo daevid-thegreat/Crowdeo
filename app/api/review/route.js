@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 
 import { PrismaClient } from '@prisma/client';
-import rewardUserForReview from '@/scripts/SendReward';
+import { rewardUserForReview } from '@/scripts/SendReward';
 
 export async function POST(req, res) {
 
@@ -30,7 +30,7 @@ export async function POST(req, res) {
     const newReview = await prisma.review.create({
       data: {
         rating: parseInt(body.rating),
-        reviewAddress: userAddress,
+        reviewerAddress: userAddress,
         comment: body.comment,
         company: {
           connect: {

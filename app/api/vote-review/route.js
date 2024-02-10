@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 
 import { PrismaClient } from '@prisma/client';
-import rewardUserForReview from '@/scripts/SendReward';
+import { rewardReviewerForUpvote } from '@/scripts/SendReward';
 
 export async function POST(req, res) {
 

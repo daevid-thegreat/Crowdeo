@@ -4,13 +4,13 @@ import Web3 from 'web3';
 const web3 = new Web3('HTTP://127.0.0.1:7545'); // Connect to your Ethereum node
 
 
-const CrowdoeTokenAddress = '0xc60b6299E1AFfce31e2a1E4Fbd0d310231efDdDf'; // Replace with your contract address
+const CrowdoeTokenAddress = '0xf84F7b5eAC70ff2226dE46B38242B79EC63e6180'; // Replace with your contract address
 
 const contract = new web3.eth.Contract(CrowdoeTokenABI.abi, CrowdoeTokenAddress);
 
 export async function rewardUserForReview(userAddress) {
   try {
-    const ownerAddress = "0x79bB469E278C7F00697d585edeb84fC6FB1dA994"
+    const ownerAddress = "0x436C9b59795F95C2e46aa1dE4e900328E072C823"
     const balance = await contract.methods.balanceOf(ownerAddress).call();
 
     if (balance >= 20 * 10**18) { // Check if the balance is sufficient
@@ -26,7 +26,7 @@ export async function rewardUserForReview(userAddress) {
 
 export async function rewardVoter(userAddress) {
   try {
-    const ownerAddress = "0x79bB469E278C7F00697d585edeb84fC6FB1dA994"
+    const ownerAddress = "0x436C9b59795F95C2e46aa1dE4e900328E072C823"
     const balance = await contract.methods.balanceOf(ownerAddress).call();
 
     if (balance >= 10 * 10**18) { // Check if the balance is sufficient
@@ -42,7 +42,7 @@ export async function rewardVoter(userAddress) {
 
 export async function rewardReviewerForUpvote(userAddress) {
   try {
-    const ownerAddress = "0x79bB469E278C7F00697d585edeb84fC6FB1dA994"
+    const ownerAddress = "0x436C9b59795F95C2e46aa1dE4e900328E072C823"
     const balance = await contract.methods.balanceOf(ownerAddress).call();
 
     if (balance >= 5 * 10**18) { // Check if the balance is sufficient
