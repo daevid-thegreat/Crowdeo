@@ -33,10 +33,11 @@ export async function POST(req, res) {
             downvote: updateReview.downvote + downvote
         }
         }).then(async () => {
-      rewardUserForReview(userAddress)
+      rewardVoter(userAddress)
+      if (vote == true) {
+        rewardReviewerForUpvote(updateReview.reviewerAddress)
+      }
     });
-
-    console.log('New review created')
 
 
     return NextResponse.json({ status: 200, body: newReview })
