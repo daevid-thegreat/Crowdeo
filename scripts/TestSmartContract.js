@@ -3,6 +3,7 @@
 
 import { getUserBalance, rewardUserForReview } from "./SendReward"; // Adjust the path as necessary
 
+import { PrismaClient } from '@prisma/client';
 import data from "./data.json"; // Adjust the path as necessary
 
 async function createMassReview(){
@@ -13,7 +14,7 @@ async function createMassReview(){
 data.forEach(async (entry) => {
   const { userAddress, comment, rating, companyId } = entry;
 
-  await prisma.review.create({
+    prisma.review.create({
     data: {
       rating: rating,
       reviewerAddress: userAddress,
